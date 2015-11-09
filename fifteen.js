@@ -10,6 +10,8 @@ window.onload = function()
 	var emptyTop = 300;
 	var emptyLeft = 300;
 
+	var gameStarted = false;
+
 
 	puzzsq[0].style.backgroundPosition = "0px 0px";
 	puzzsq[1].style.backgroundPosition = "-100px 0px";
@@ -29,11 +31,7 @@ window.onload = function()
 
 	for( i = 0; i < puzzsq.length; i++ )
 	{
-		//puzzsq[i].addClassName("puzzlepiece");
 		puzzsq[i].className = 'puzzlepiece';
-		//puzzsq[i].style.position = "relative";
-		//puzzsq
-		//puzzsq[i].style.float = "left";
 
 		puzzsq[i].style.backgroundSize = "400px 400px";
 
@@ -47,50 +45,29 @@ window.onload = function()
 			positionLeft = 0;
 			positionTop = positionTop + 100;
 		}
-
-		/*puzzsq[i].onmouseover = function () {
-			var piece = this;
-			//console.log(piece.style.left);
-			 
-			if (parseInt(piece.style.left) ) {
-				console.log('can move');
-			}
-			else
-				console.log("Can't Move")
-		}*/
-		//puzzsq[i].addClassName('movablepiece');
 				
 	}
-	//puzzsq[14].AddclassName = ('movablepiece');
-
-	/*var hoverover = function(v){
-		puzzsq[v].onmouseover = function() {
-			puzzsq[v].addClassName('movablepiece');
-		}
-	}*/
 
 	document.getElementById('controls').onclick = function shuffle() {
 		ranList = [];
 		var ran = 0;
 		newpostop = 0;
 		newposleft = 0;
+		emptyTop = 300;
+		emptyLeft = 300;
+		gameStarted = true;
 		while (ran !== 15){
 			num = Math.floor(Math.random()*(puzzsq.length));
-			//console.log(ranList.indexOf(num));
-			//console.log(ranList.length);
 			if(ranList.indexOf(num) === -1) {
 				ranList.push(num);
-				//alert('added a number');
 				console.log(ranList);
 				console.log(ranList.length);
-				//console.log(ranList[num]);
 				ran++;
 			}	
 		}
 		for ( i = 0; i < ranList.length; i++ ) {
 			puzzsq[ranList[i]].style.top = newpostop + "px";
 			puzzsq[ranList[i]].style.left = newposleft + "px";
-			//newposleft = newposleft + 100;
 			if( newposleft < 300) {
 				newposleft = newposleft + 100;
 			}
@@ -124,7 +101,7 @@ window.onload = function()
 		if ( winner == 15 ){
 			document.getElementsByTagName("h1")[0].innerHTML = "CONGRATULATIONS";
 			document.getElementsByTagName("h1")[0].style.color = 'green';
-			for ( i = 0; i <puzzsq.length; i++) {
+			for ( i = 0; i < puzzsq.length; i++) {
 				puzzsq[i].style.backgroundImage = "url('winpic.jpg')";
 				puzzsq[i].style.borderColor = 'green';
 				puzzsq[i].style.top = atop + "px";
@@ -139,12 +116,19 @@ window.onload = function()
 			} 
 		}
 		if( winner == 14 ) {
+			console.log(winner);
 			var help = prompt(" Looks like you in a pickle ... would you like to use your HELPING HAND CARD", "YES or NO");
 			help = help.toUpperCase();
-			if(help == "YES") {
-				for ( i = 0; i <puzzsq[i].length; i++) {
+			console.log(help);
+			if(help ===	 "YES") {
+				console.log(help)
+				document.getElementsByTagName("h1")[0].innerHTML = "CONGRATULATIONS";
+				document.getElementsByTagName("h1")[0].style.color = 'green';
+				for ( i = 0; i < puzzsq.length; i++) {
+					puzzsq[i].style.backgroundImage = "url('winpic.jpg')";
+					puzzsq[i].style.borderColor = 'green';
 					puzzsq[i].style.top = atop1 + "px";
-					puzzsq[i].style.left = aleft1 + "px"
+					puzzsq[i].style.left = aleft1 + "px";
 					if ( aleft1 < 300) {
 						aleft1 = aleft1 + 100; 
 					}
@@ -152,20 +136,20 @@ window.onload = function()
 						aleft1 = 0;
 						atop1 = atop1 + 100;
 					}
-					puzzsq[i].style.backgroundImage = "url('winpic.jpg')";
-					puzzsq[i].style.borderColor = 'green';
 				}
-				document.getElementsByTagName("h1")[0].innerHTML = "CONGRATULATIONS";
-				document.getElementsByTagName("h1")[0].style.color = 'green';
 			}
 		}
 		if( winner == 13 ) {
 			var help = prompt(" Looks like you in a pickle ... would you like to use your HELPING HAND CARD", "YES or NO");
 			help = help.toUpperCase();
-			if(help == "YES") {
-				for ( i = 0; i <puzzsq[i].length; i++) {
+			if(help === "YES") {
+				document.getElementsByTagName("h1")[0].innerHTML = "CONGRATULATIONS";
+				document.getElementsByTagName("h1")[0].style.color = 'green';
+				for ( i = 0; i < puzzsq.length; i++) {
+					puzzsq[i].style.backgroundImage = "url('winpic.jpg')";
+					puzzsq[i].style.borderColor = 'green';
 					puzzsq[i].style.top = atop1 + "px";
-					puzzsq[i].style.left = aleft1 + "px"
+					puzzsq[i].style.left = aleft1 + "px";
 					if ( aleft1 < 300) {
 						aleft1 = aleft1 + 100; 
 					}
@@ -173,11 +157,8 @@ window.onload = function()
 						aleft1 = 0;
 						atop1 = atop1 + 100;
 					}
-					puzzsq[i].style.backgroundImage = "url('winpic.jpg')";
-					puzzsq[i].style.borderColor = 'green';
 				}
-				document.getElementsByTagName("h1")[0].innerHTML = "CONGRATULATIONS";
-				document.getElementsByTagName("h1")[0].style.color = 'green';
+				
 			}
 		}
 	}
@@ -185,10 +166,6 @@ window.onload = function()
 
 	for ( i = 0; i < puzzsq.length; i++ )
 	{
-		
-		//puzzsq[i].addEventListener("click", swap(parseInt(puzzsq[i].style.top.substring(0,3)), parseInt(puzzsq[i].style.left.substring(0,3)) ));
-		//console.log(parseInt(puzzsq[i].style.top.substring(0,3)), parseInt(puzzsq[i].style.left.substring(0,3)));
-		//puzzsq[i].addClassName('movablepiece');
 		puzzsq[i].onclick = function(){
 			postop = parseInt(this.style.top);
 			posleft = parseInt(this.style.left);
@@ -197,7 +174,7 @@ window.onload = function()
 				this.style.left = emptyLeft + "px";
 				emptyTop = postop;
 				emptyLeft = posleft;
-				if ( document.getElementById('shufflebutton').click )
+				if ( gameStarted )
 				{
 					extra();
 				}				
